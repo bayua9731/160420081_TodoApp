@@ -40,7 +40,7 @@ class StudentDetailFragment : Fragment() {
         viewModel.studentLD.observe(viewLifecycleOwner, Observer {
             txtID.setText(it.id.toString())
             txtStudentName.setText(it.name.toString())
-            txtBod.setText(it.dob.toString())
+            txtBod.setText(it.bod.toString())
             txtPhone.setText(it.phone.toString())
         })
     }
