@@ -39,4 +39,11 @@ class ListTodoViewModel(application: Application)
             todoLD.postValue(db.todoDao().selectAllTodo())
         }
     }
+    fun updateIsDoneFunction(todo: Todo){
+        launch {
+            val db= buildDb(getApplication())
+            db.todoDao().updateIsDone(todo.uuid)
+            todoLD.postValue(db.todoDao().selectAllTodo())
+        }
+    }
 }

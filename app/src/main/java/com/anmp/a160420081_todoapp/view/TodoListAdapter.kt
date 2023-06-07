@@ -25,9 +25,6 @@ class TodoListAdapter(val todoList:ArrayList<Todo>,val adapterOnClick : (Todo) -
         var checktask = holder.view.findViewById<CheckBox>(R.id.checkBox)
         var imgEdit=holder.view.findViewById<ImageButton>(R.id.imageButton)
         checktask.text = todoList[position].title
-        checktask.setOnCheckedChangeListener { compoundButton, b ->
-            adapterOnClick(todoList[position])
-        }
         imgEdit.setOnClickListener {
             val action =TodoListFragmentDirections.actionEditTodo(todoList[position].uuid)
             Navigation.findNavController(it).navigate(action)
