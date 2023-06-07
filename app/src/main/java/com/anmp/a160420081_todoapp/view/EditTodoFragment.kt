@@ -1,6 +1,7 @@
 package com.anmp.a160420081_todoapp.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.anmp.a160420081_todoapp.R
 import com.anmp.a160420081_todoapp.viewmodel.DetailTodoViewModel
+import kotlinx.android.synthetic.main.fragment_create_todo.*
 
 
 class EditTodoFragment : Fragment() {
@@ -25,13 +27,15 @@ class EditTodoFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
         var txtJudulTodo=view.findViewById<TextView>(R.id.txtJudulTodo)
         var btnAdd=view.findViewById<Button>(R.id.btnAdd)
         txtJudulTodo.text = "Edit Todo"
         btnAdd.text = "Save Changes"
 
-        viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
+
         val uuid = EditTodoFragmentArgs.fromBundle(requireArguments()).uuid
+        Log.d("TESTES",uuid.toString())
         viewModel.fetch(uuid)
         observeViewModel()
 
@@ -52,17 +56,12 @@ class EditTodoFragment : Fragment() {
     }
     fun observeViewModel() {
         viewModel.todoLD.observe(viewLifecycleOwner, Observer {
-            var txtTitle= view?.findViewById<TextView>(R.id.txtTitle)
-            var txtNotes=view?.findViewById<TextView>(R.id.txtNotes)
-            txtTitle?.setText(it.title)
-            txtNotes?.setText(it.notes)
-            var radioLow=view?.findViewById<RadioButton>(R.id.radioLow)
-            var radioMedium=view?.findViewById<RadioButton>(R.id.radioMedium)
-            var radioHigh=view?.findViewById<RadioButton>(R.id.radioHigh)
+            txtTitle.setText(it.title)
+            txtNotes.setText(it.notes)
             when (it.priority) {
-                1 -> radioLow?.isChecked = true
-                2 -> radioMedium?.isChecked = true
-                else -> radioHigh?.isChecked = true
+                1 -> radioLow.isChecked = true
+                2 -> radioMedium.isChecked = true
+                else -> radioHigh.isChecked = true
             }
 
         })
