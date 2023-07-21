@@ -3,9 +3,13 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
 }
 
 android {
+    dataBinding{
+        enabled true
+    }
     namespace 'com.anmp.adv160420081week4'
     compileSdk 33
 

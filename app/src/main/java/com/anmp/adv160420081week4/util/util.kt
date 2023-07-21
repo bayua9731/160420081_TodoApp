@@ -3,9 +3,15 @@ package com.anmp.adv160420081week4.util
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.databinding.BindingAdapter
 import com.anmp.adv160420081week4.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+
+@BindingAdapter("app:imageUrl","app:progressbar")
+fun loadPhotoURL(view:ImageView,url:String?,pb:ProgressBar){
+    url?.let { view.loadImage(it,pb) }
+}
 
 fun ImageView.loadImage(url: String,progressBar: ProgressBar){
     Picasso.get()
